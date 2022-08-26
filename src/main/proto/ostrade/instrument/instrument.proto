@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_package = "org.ostrade.proto.instrument";
+option java_outer_classname = "InstrumentProtos";
+option java_multiple_files = true;
+
+package ostrade.instrument;
+
+import "ostrade/common/type.proto";
+import "ostrade/common/field.proto";
+
+message Instrument {
+  int64 instrument_id = 1;
+  ostrade.field.ExecutionVenue execution_venue = 2;
+  ostrade.field.SecurityType security_type = 3;
+  string cfi = 4;
+  string symbol = 5;
+  string description = 6;
+  string maturity_month_year = 7;
+  ostrade.type.Date maturity_date = 8;
+  ostrade.field.UnitOfMeasure unit_of_measure = 9;
+  ostrade.type.Decimal unit_of_measure_quantity = 10;
+  ostrade.field.UnitOfMeasure price_unit_of_measure = 11;
+  ostrade.type.Decimal price_unit_of_measure_quantity = 12;
+  ostrade.field.SettlementMethod settlement_method = 13;
+  ostrade.field.Currency price_quote_currency = 14;
+  repeated InstrumentLeg instrument_legs = 100;
+}
+
+message InstrumentLeg {
+  int64 instrument_leg_id = 1;
+  int64 instrument_id = 2;
+  string symbol = 3;
+  string maturity_month_year = 4;
+  ostrade.field.SecurityType security_type = 5;
+  ostrade.field.Side side = 6;
+}
